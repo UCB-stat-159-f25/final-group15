@@ -1,0 +1,146 @@
+% Created with jtex v.1.0.20
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage{datetime}
+\usepackage{graphicx}
+\usepackage{natbib}
+\bibliographystyle{abbrvnat}
+
+
+
+% colors for hyperlinks
+\hypersetup{colorlinks=true, allcolors=blue}
+
+\newcommand{\logo}{
+  \href{https://curvenote.com}{\includegraphics[width=2cm]{curvenote.png}}
+}
+
+\title{Data cleaning and daily aggregation}
+
+\author{}
+
+\newdate{articleDate}{17}{12}{2025}
+\date{\displaydate{articleDate}}
+
+\begin{document}
+\maketitle
+\begin{center}\logo\end{center}
+
+
+\begin{verbatim}
+#NOTE:
+#there is no 04/2020 for the bike data
+\end{verbatim}
+
+\begin{verbatim}
+import os
+os.chdir("..")
+\end{verbatim}
+
+\begin{verbatim}
+def line(char="=", length=50):
+    return char * length
+\end{verbatim}
+
+\begin{verbatim}
+import zipfile
+import pandas as pd
+import glob
+import gc
+\end{verbatim}
+
+\begin{verbatim}
+def load_and_aggregate_daily_stats(data_folder="data2"):
+    zip_files = sorted(glob.glob(f"{data_folder}/*.zip"))
+    print(line())
+    print(f"Processing {len(zip_files)} files...")
+    print(line())
+    daily_sums = {}
+    for i, zf in enumerate(zip_files, start=1):
+        print(f"[{i}/{len(zip_files)}] {zf}")
+        
+        with zipfile.ZipFile(zf, 'r') as z:
+            csv_name = z.namelist()[0]
+            with z.open(csv_name) as f:
+                for chunk in pd.read_csv(f, chunksize=50000, low_memory=False):
+                    # Find time column
+                    time_col = next((c for c in ['start_time', 'started_at', 'Start Time'] if c in chunk.columns), None)
+                    if not time_col:
+                        continue
+                    # Find duration column
+                    dur_col = next((c for c in ['duration_sec', 'Duration', 'tripduration']if c in chunk.columns), None)
+                    
+                    # Clean dates
+                    chunk[time_col] = pd.to_datetime(chunk[time_col], errors='coerce')
+                    chunk = chunk.dropna(subset=[time_col])
+                    chunk['date'] = chunk[time_col].dt.date
+            
+                    # Aggregate by date
+                    for date, grp in chunk.groupby('date'):
+                        if date not in daily_sums:
+                            daily_sums[date] = {'dur': 0, 'trips': 0, 'bike_share': 0, 'subs': 0}
+                        
+                        if dur_col:
+                            daily_sums[date]['dur'] += grp[dur_col].sum()
+                        daily_sums[date]['trips'] += len(grp)
+                        if 'bike_share_for_all_trip' in grp.columns:
+                            daily_sums[date]['bike_share'] += (grp['bike_share_for_all_trip'] == 'Yes').sum()
+                        if 'user_type' in grp.columns:
+                            daily_sums[date]['subs'] += (grp['user_type'] == 'Subscriber').sum()
+        if i % 10 == 0:
+            gc.collect()
+    
+    rows = []
+    for date, s in daily_sums.items():
+        rows.append({
+            'date': date,
+            'avg_duration_sec': s['dur'] / s['trips'],
+            'pct_bike_share_yes': (s['bike_share'] / s['trips']) * 100,
+            'pct_subscriber': (s['subs'] / s['trips']) * 100,
+            'total_trips': s['trips']
+        })
+    
+    df = pd.DataFrame(rows).sort_values('date').set_index('date')
+    print(f"\nDone: {len(df)} days, {df['total_trips'].sum():,.0f} trips")
+    
+    return df
+\end{verbatim}
+
+\begin{verbatim}
+from src.data_utils import load_weather_data
+daily_stats = load_weather_data("data/daily_stats.csv")
+\end{verbatim}
+
+\begin{verbatim}
+from src.data_utils import load_weather_data
+
+df = load_weather_data("data/USW00023272.csv")
+
+df["DATE"] = pd.to_datetime(df["DATE"])
+
+mask = (df["DATE"] >= "2018 -01 -01") & (df["DATE"] <= "2024 -12 -31")
+df_filtered = df.loc[mask].copy()
+
+print(f"Original rows: {len(df):,}")
+print(f"Filtered rows: {len(df_filtered):,}")
+print(f"Date range: {df_filtered['DATE'].min()} to {df_filtered['DATE'].max()}")
+
+output_file = "data/weather_2018_2024.csv"
+df_filtered.to_csv(output_file, index=False)
+print(f"Exported to: {output_file}")
+\end{verbatim}
+
+\begin{verbatim}
+Original rows: 38,326
+Filtered rows: 2,557
+Date range: 2018 -01 -01 00:00:00 to 2024 -12 -31 00:00:00
+Exported to: data/weather_2018_2024.csv
+\end{verbatim}
+
+\begin{verbatim}
+/home/jovyan/final -group15/src/data_utils.py:21: DtypeWarning: Columns (17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49,51) have mixed types. Specify dtype option on import or set low_memory=False.
+  return pd.read_csv(path)
+\end{verbatim}
+
+
+\end{document}
