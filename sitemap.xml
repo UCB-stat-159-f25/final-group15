@@ -1,49 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="http://localhost:3000/sitemap_style.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="http://localhost:3002/sitemap_style.xsl" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:3000</loc>
+    <loc>http://localhost:3002</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/cleaner-980eb3ec59d2f3a9daa86ba623c05d6d</loc>
+    <loc>http://localhost:3002/main</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/main-e3180901050969756782cc7788a38e23</loc>
+    <loc>http://localhost:3002/project-description</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/readme-b1c12852e4958e370c03cc2496ee6fb2</loc>
+    <loc>http://localhost:3002/cleaner</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/visualization-analys-646fcde38220b072e87b39c1fece6</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/cleaner-980eb3ec59d2-3f5753988786ccf3bce13c1cfcba6</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/cleaner-980eb3ec59d2f3a9daa86ba623c05d6d-1</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/main-e31809010509697-180b643c343d97d3c4c9a2361c9bb</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/main-e3180901050969756782cc7788a38e23-1</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/project-description-2d268b97a4a4370456ae78ff1c4049</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/project-description-fb3c6755fac145dd65cff96f0d6e51-1</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/readme-b1c12852e4958e370c03cc2496ee6fb2-1</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/readme-b1c12852e4958-e982251b73e042ccf4dfbc885b630</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/visualization-analys-646fcde38220b072e87b39c1fece6-1</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/visualization-analys-d91fcb559d331635994efc70066cf</loc>
+    <loc>http://localhost:3002/visualization-analysis</loc>
   </url>
 </urlset>
