@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://localhost:3006/sitemap_style.xsl" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://localhost:3006</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3006/main</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3006/project-description</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3006/cleaner</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3006/visualization-analysis</loc>
+  </url>
+</urlset>
