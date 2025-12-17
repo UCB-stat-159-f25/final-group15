@@ -1,8 +1,0 @@
-version: 1
-project:
-  title: "Bay Wheels Ridership and Weather"
-site:
-  template: book-theme
-  options:
-    url: https://ucb-stat-159-f25.github.io
-    baseurl: /final-group15
