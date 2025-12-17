@@ -121,3 +121,9 @@ The Binder link allows the project to be launched and executed in the cloud with
 ## Testing
 
 This project does not include unit tests. Reproducibility is ensured through deterministic data processing steps and complete environment specification.
+
+---
+
+## License
+
+This project is licensed under the BSD 3 Clause License.
