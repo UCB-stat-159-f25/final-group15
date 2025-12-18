@@ -4,6 +4,9 @@ This document describes how our group used AI tools during the completion of thi
 Paul Verdickt:
 Used ai to help with graphical coding syntax as well as correlation coding syntax.
 
+JP Chiu:
+Used ai to help generate ideas for possible visualization for the project.
+
 Jun Kang:
 Used ChatGPT as an assistant for:
 1. Debugging MyST build and GitHub Pages deployment steps
