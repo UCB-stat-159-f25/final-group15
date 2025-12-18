@@ -1,2 +1,36 @@
+# AI Documentation
+This document describes how our group used AI tools during the completion of this Stat 159 or 259 final project.
+
 Paul Verdickt:
 Used ai to help with graphical coding syntax as well as correlation coding syntax.
+
+Jun Kang:
+Used ChatGPT as an assistant for:
+1. Debugging MyST build and GitHub Pages deployment steps
+2. Writing and refining command line workflows for git, worktrees, and gh pages deployment
+3. Drafting and editing README instructions and general project organization guidance
+4. Suggesting testing structure and example pytest style tests for utility functions
+5. Clarifying course requirements and creating a checklist to verify deliverables
+
+## What AI did
+AI was used to:
+- Explain error messages and propose fixes
+- Provide shell command sequences to build the MyST site and deploy it to the gh pages branch using git worktree
+- Provide templates for repository documentation, including README sections and DOI badge formatting
+- Provide guidance on what components should be included for reproducibility, such as environment.yml, Makefile targets, and notebook execution expectations
+
+## What humans did
+Team members:
+- Chose the dataset and defined the research questions
+- Wrote the analysis code, functions, and tests in the repository
+- Interpreted results, created figures, and wrote the narrative in main.ipynb
+- Reviewed and edited all text for correctness and clarity
+- Ran builds, executed notebooks, and verified outputs
+- Performed final deployment, release, and Zenodo archival steps
+
+## Verification
+We reviewed AI suggested commands before running them and adjusted paths and filenames to match our repository structure. We also manually checked that:
+- All notebooks run successfully
+- Tests pass
+- PDF builds exist in pdf_builds
+- The GitHub Pages site renders correctly
