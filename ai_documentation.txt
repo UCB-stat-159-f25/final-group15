@@ -34,3 +34,6 @@ We reviewed AI suggested commands before running them and adjusted paths and fil
 - Tests pass
 - PDF builds exist in pdf_builds
 - The GitHub Pages site renders correctly
+
+Logan
+Used ChatGPT to identify appropriate Python standard library and third party tools for handling and extracting compressed zip files during data ingestion. AI assistance was limited to library discovery and basic usage patterns. All data processing logic, analysis decisions, and implementation were written and verified manually.
